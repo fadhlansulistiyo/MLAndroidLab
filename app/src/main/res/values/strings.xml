@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ML Android Lab</string>
+    <string name="ml_kit">ML Kit</string>
+    <string name="tensorflowlite">TensorFlow Lite</string>
+    <string name="mediapipe">MediaPipe</string>
+    <string name="generativeai">Generative AI</string>
+    <string name="firebase_ml">Firebase Machine Learning</string>
+    <string name="asclepius">Asclepius</string>
+    <string name="text_recognition">Text Recognition</string>
+    <string name="barcode_scanning">Barcode Scanning</string>
+    <string name="image_classification">Image Classification</string>
+    <string name="prediction">Prediction</string>
+    <string name="audio_classification">Audio Classification</string>
+    <string name="sentiment_analysis">Sentiment Analysis</string>
+    <string name="custom_model_deployment">Custom Model Deployment</string>
+    <string name="smart_reply">Smart Reply</string>
+    <string name="bert">BERT</string>
+</resources>
