@@ -58,5 +58,7 @@
 
     <style name="Theme.MLAndroidLab.Headline1" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md_theme_onPrimaryContainer</item>
     </style>
 </resources>

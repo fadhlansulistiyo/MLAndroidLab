@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/ml_kit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
@@ -224,6 +224,22 @@
             android:text="@string/asclepius"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_generative_ai" />
+
+        <LinearLayout
+            android:id="@+id/layout_asclepius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:paddingBottom="32dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_title_asclepius1"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_asclepius1">
+
+            <include
+                layout="@layout/layout_asclepius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

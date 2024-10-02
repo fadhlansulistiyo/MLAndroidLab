@@ -8,6 +8,7 @@
     <color name="mediapipe_background">#0097a7</color>
     <color name="firebase_ml">#FF6500</color>
     <color name="generative_ai">#FF5858</color>
+    <color name="asclepius">#8DFF80</color>
 
     <color name="md_theme_primary">#88D6BA</color>
     <color name="md_theme_onPrimary">#00382A</color>
