@@ -37,6 +37,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -50,11 +51,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // TensorFlow Lite
-    implementation(libs.tensorflow.lite.task.vision)
-    implementation(libs.tensorflow.lite.support)
-    implementation(libs.tensorflow.lite.metadata)
 
     // retrofit
     implementation(libs.retrofit)
@@ -82,4 +78,20 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
+
+    // ML Kit
+    implementation(libs.text.recognition)
+    implementation(libs.translate)
+    implementation(libs.play.services.mlkit.barcode.scanning) // barcode scanning
+    implementation(libs.androidx.camera.mlkit.vision) // vision for cameraX
+
+    // TensorFlow Lite
+    implementation(libs.tensorflow.lite.task.vision)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+
+    // CameraX
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
 }

@@ -1,5 +1,7 @@
 [versions]
 agp = "8.5.0"
+cameraCamera2 = "1.3.4"
+cameraMlkitVision = "1.4.0-rc03"
 glide = "4.16.0"
 hiltAndroid = "2.51"
 kotlin = "1.9.0"
@@ -15,12 +17,19 @@ material = "1.12.0"
 activity = "1.9.2"
 constraintlayout = "2.1.4"
 ksp = "1.9.10-1.0.13"
+playServicesMlkitBarcodeScanning = "18.3.1"
 retrofit = "2.11.0"
 roomKtx = "2.6.1"
 tensorflowLiteTaskVision = "0.4.4"
+textRecognition = "16.0.0"
+translate = "17.0.3"
 ucrop = "2.2.9"
 
 [libraries]
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCamera2" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraCamera2" }
+androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "cameraMlkitVision" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraCamera2" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
@@ -40,10 +49,13 @@ lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+play-services-mlkit-barcode-scanning = { module = "com.google.android.gms:play-services-mlkit-barcode-scanning", version.ref = "playServicesMlkitBarcodeScanning" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 tensorflow-lite-metadata = { module = "org.tensorflow:tensorflow-lite-metadata", version.ref = "tensorflowLiteTaskVision" }
 tensorflow-lite-support = { module = "org.tensorflow:tensorflow-lite-support", version.ref = "tensorflowLiteTaskVision" }
 tensorflow-lite-task-vision = { module = "org.tensorflow:tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVision" }
+text-recognition = { module = "com.google.mlkit:text-recognition", version.ref = "textRecognition" }
+translate = { module = "com.google.mlkit:translate", version.ref = "translate" }
 ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 
 [plugins]
