@@ -67,7 +67,7 @@
         <item name="android:textColor">@color/md_theme_onPrimaryContainer</item>
     </style>
 
-    <style name="Theme.Asclepius.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="Theme.MLAndroidLab.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="fontFamily">@font/urbanist_medium</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/md_theme_primary</item>

@@ -36,4 +36,7 @@
     <string name="please_select_an_image_first">Please select an image first!</string>
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="text_copied_to_clipboard">Text copied to clipboard</string>
+    <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
+    <string name="cancer_detection">Cancer Detection</string>
+    <string name="select_an_image_from_gallery">Select an image from Gallery to process the skin check.</string>
 </resources>
