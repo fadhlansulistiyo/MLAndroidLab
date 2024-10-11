@@ -57,7 +57,7 @@
 
             <Button
                 android:id="@+id/editButton"
-                style="@style/Theme.Asclepius.OutlinedButton"
+                style="@style/Theme.MLAndroidLab.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

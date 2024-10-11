@@ -18,9 +18,13 @@ activity = "1.9.2"
 constraintlayout = "2.1.4"
 ksp = "1.9.10-1.0.13"
 playServicesMlkitBarcodeScanning = "18.3.1"
+playServicesTfliteGpu = "16.2.0"
+playServicesTfliteSupport = "16.1.0"
 retrofit = "2.11.0"
 roomKtx = "2.6.1"
+tensorflowLiteGpu = "2.9.0"
 tensorflowLiteTaskVision = "0.4.4"
+tensorflowLiteTaskVisionPlayServices = "0.4.2"
 textRecognition = "16.0.0"
 translate = "17.0.3"
 ucrop = "2.2.9"
@@ -50,10 +54,14 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 play-services-mlkit-barcode-scanning = { module = "com.google.android.gms:play-services-mlkit-barcode-scanning", version.ref = "playServicesMlkitBarcodeScanning" }
+play-services-tflite-gpu = { module = "com.google.android.gms:play-services-tflite-gpu", version.ref = "playServicesTfliteGpu" }
+play-services-tflite-support = { module = "com.google.android.gms:play-services-tflite-support", version.ref = "playServicesTfliteSupport" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+tensorflow-lite-gpu = { module = "org.tensorflow:tensorflow-lite-gpu", version.ref = "tensorflowLiteGpu" }
 tensorflow-lite-metadata = { module = "org.tensorflow:tensorflow-lite-metadata", version.ref = "tensorflowLiteTaskVision" }
 tensorflow-lite-support = { module = "org.tensorflow:tensorflow-lite-support", version.ref = "tensorflowLiteTaskVision" }
 tensorflow-lite-task-vision = { module = "org.tensorflow:tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVision" }
+tensorflow-lite-task-vision-play-services = { module = "org.tensorflow:tensorflow-lite-task-vision-play-services", version.ref = "tensorflowLiteTaskVisionPlayServices" }
 text-recognition = { module = "com.google.mlkit:text-recognition", version.ref = "textRecognition" }
 translate = { module = "com.google.mlkit:translate", version.ref = "translate" }
 ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }

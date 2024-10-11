@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.fadhlansulistiyo.mlandroidlab.asclepius.CancerDetectionActivity
 import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityMainBinding
 import com.fadhlansulistiyo.mlandroidlab.mlkit.BarcodeScanningActivity
 import com.fadhlansulistiyo.mlandroidlab.mlkit.TextRecognitionActivity
+import com.fadhlansulistiyo.mlandroidlab.tensorflowlite.TFLImageClassificationActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         binding.toMlkit.cardBarcodeScanning.setOnClickListener {
             toBarcodeScanning()
         }
+        binding.toAsclepius.cardAsclepius.setOnClickListener {
+            toAsclepius()
+        }
+        binding.toTflite.cardImageClassification.setOnClickListener {
+            toTFLImageClassification()
+        }
     }
 
     private fun toTextRecognition() {
@@ -41,4 +49,13 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun toAsclepius() {
+        val intent = Intent(this@MainActivity, CancerDetectionActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun toTFLImageClassification() {
+        val intent = Intent(this@MainActivity, TFLImageClassificationActivity::class.java)
+        startActivity(intent)
+    }
 }

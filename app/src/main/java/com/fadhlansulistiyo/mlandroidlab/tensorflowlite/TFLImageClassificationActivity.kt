@@ -1,0 +1,167 @@
+package com.fadhlansulistiyo.mlandroidlab.tensorflowlite
+
+import android.os.Build
+import android.os.Bundle
+import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowManager
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
+import androidx.camera.core.resolutionselector.AspectRatioStrategy
+import androidx.camera.core.resolutionselector.ResolutionSelector
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.content.ContextCompat
+import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityTflimageClassificationBinding
+import org.tensorflow.lite.task.gms.vision.detector.Detection
+import java.text.NumberFormat
+import java.util.concurrent.Executors
+
+class TFLImageClassificationActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityTflimageClassificationBinding
+    private lateinit var objectDetectorHelper: ObjectDetectorHelper
+    private val cameraSelector: CameraSelector by lazy {
+        CameraSelector.DEFAULT_BACK_CAMERA
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideSystemUI()
+        startImageClassification()
+    }
+
+    private fun setupUI() {
+        enableEdgeToEdge()
+        binding = ActivityTflimageClassificationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    private fun startImageClassification() {
+        objectDetectorHelper = createObjectDetectorHelper()
+
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+
+        cameraProviderFuture.addListener({
+            val imageAnalyzer = createImageAnalyzer()
+            bindCamera(cameraProviderFuture.get(), imageAnalyzer)
+        }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun createObjectDetectorHelper(): ObjectDetectorHelper {
+        return ObjectDetectorHelper(
+            context = this,
+            detectorListener = object : ObjectDetectorHelper.DetectorListener {
+                override fun onError(error: String) {
+                    showToast(error)
+                }
+
+                override fun onResults(
+                    results: MutableList<Detection>?,
+                    inferenceTime: Long,
+                    imageHeight: Int,
+                    imageWidth: Int
+                ) {
+                    processResults(results, inferenceTime, imageHeight, imageWidth)
+                }
+            }
+        )
+    }
+
+    private fun createImageAnalyzer(): ImageAnalysis {
+        val resolutionSelector = ResolutionSelector.Builder()
+            .setAspectRatioStrategy(AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
+            .build()
+
+        return ImageAnalysis.Builder()
+            .setResolutionSelector(resolutionSelector)
+            .setTargetRotation(binding.viewFinder.display.rotation)
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+            .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
+            .build().apply {
+                setAnalyzer(Executors.newSingleThreadExecutor()) { image ->
+                    objectDetectorHelper.detectObject(image)
+                }
+            }
+    }
+
+    private fun bindCamera(cameraProvider: ProcessCameraProvider, imageAnalyzer: ImageAnalysis) {
+        val preview = Preview.Builder().build().also {
+            it.surfaceProvider = binding.viewFinder.surfaceProvider
+        }
+
+        try {
+            cameraProvider.unbindAll()
+            cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
+        } catch (exc: Exception) {
+            showToast("Failed to bind camera: ${exc.message}")
+            Log.e(TAG, "bindCamera: ${exc.message}", exc)
+        }
+    }
+
+    private fun processResults(
+        results: MutableList<Detection>?,
+        inferenceTime: Long,
+        imageHeight: Int,
+        imageWidth: Int
+    ) {
+        runOnUiThread {
+            results?.let {
+                if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
+                    binding.overlay.setResults(results, imageHeight, imageWidth)
+                    displayResults(it, inferenceTime)
+                } else {
+                    clearResults()
+                }
+            }
+            binding.overlay.invalidate() // Force a redraw
+        }
+    }
+
+    private fun displayResults(results: MutableList<Detection>, inferenceTime: Long) {
+        val resultText = buildString {
+            for (result in results) {
+                val label = result.categories[0].label
+                val confidence = NumberFormat.getPercentInstance().format(result.categories[0].score).trim()
+                append("$label $confidence \n")
+            }
+        }
+
+        binding.tvResult.text = resultText
+        binding.tvInferenceTime.text = "$inferenceTime ms"
+    }
+
+    private fun clearResults() {
+        binding.overlay.clear()
+        binding.tvResult.text = ""
+        binding.tvInferenceTime.text = ""
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this@TFLImageClassificationActivity, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun hideSystemUI() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            @Suppress("DEPRECATION")
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+    }
+
+    companion object {
+        private const val TAG = "TFLImageClassificationActivity"
+    }
+}

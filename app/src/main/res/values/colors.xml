@@ -9,6 +9,8 @@
     <color name="firebase_ml">#FF6500</color>
     <color name="generative_ai">#FF5858</color>
     <color name="asclepius">#8DFF80</color>
+    <color name="controlNormal">#000000</color>
+    <color name="bounding_box_color">#FF4800</color>
 
     <color name="md_theme_primary">#156B54</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>

@@ -119,13 +119,12 @@ class CancerDetectionActivity : AppCompatActivity(), ImageClassifierHelper.Class
         confidence: Float,
         error: String?
     ) {
-        val intent = Intent(this, CancerDetectionResultActivity::class.java)
-        intent.putExtra(CancerDetectionResultActivity.EXTRA_IMAGE_URI, currentImageUri.toString())
-        intent.putExtra(CancerDetectionResultActivity.EXTRA_SUCCESS, success)
-        intent.putExtra(CancerDetectionResultActivity.EXTRA_IS_CANCER, isCancer)
-        intent.putExtra(CancerDetectionResultActivity.EXTRA_CONFIDENCE, confidence)
-        intent.putExtra(CancerDetectionResultActivity.EXTRA_ERROR, error)
-        startActivity(intent)
+        if (success) {
+            val bottomSheetFragment = CancerDetectionResultBottomSheetFragment.newInstance(isCancer, confidence)
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+        } else {
+            showToast(error ?: "An unknown error occurred")
+        }
     }
 
     private fun showImage() {
