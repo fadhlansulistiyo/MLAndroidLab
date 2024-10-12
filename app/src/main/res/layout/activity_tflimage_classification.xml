@@ -5,14 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tensorflowlite.TFLImageClassificationActivity">
+    tools:context=".tensorflowlite.imageclassification.TFLImageClassificationActivity">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.fadhlansulistiyo.mlandroidlab.tensorflowlite.OverlayView
+    <com.fadhlansulistiyo.mlandroidlab.tensorflowlite.imageclassification.OverlayView
         android:id="@+id/overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

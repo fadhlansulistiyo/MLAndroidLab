@@ -79,6 +79,11 @@ class ImageClassifierHelper(
         }
     }
 
+    fun clear() {
+        imageClassifier?.close()  // Release the image classifier
+        imageClassifier = null    // Nullify the reference to avoid further use
+    }
+
     interface ClassifierListener {
         fun onError(error: String)
         fun onResults(

@@ -44,4 +44,11 @@
     <string name="confidence">Confidence: %</string>
     <string name="tflitevision_is_not_initialized_yet">TfLiteVision is not initialized yet</string>
 
+    <string name="rice_stock_predictor">Rice Stock Predictor</string>
+    <string name="sales_this_month">Fill in this months sales (in kg)</string>
+    <string name="predict">Next Month Stock Forecast</string>
+    <string name="tflite_is_not_initialized_yet">TfLite is not initialized yet</string>
+    <string name="no_tflite_interpreter_loaded">No TFLite interpreter loaded</string>
+    <string name="prediction_error">Prediction Error</string>
+    <string name="model_loading_error">Error to load model</string>
 </resources>
