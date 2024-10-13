@@ -5,9 +5,11 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -25,15 +27,6 @@
             android:exported="false" />
         <activity
             android:name=".tensorflowlite.imageclassification.TFLImageClassificationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".asclepius.HistoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".asclepius.CancerDetectionResultActivity"
-            android:exported="false" />
-        <activity
-            android:name=".asclepius.CancerDetectionActivity"
             android:exported="false" />
         <activity
             android:name=".mlkit.BarcodeScanningActivity"

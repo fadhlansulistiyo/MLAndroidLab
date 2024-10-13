@@ -1,4 +1,4 @@
-package com.fadhlansulistiyo.mlandroidlab.tensorflowlite
+package com.fadhlansulistiyo.mlandroidlab.tensorflowlite.imageclassification
 
 import android.content.Context
 import android.graphics.Canvas

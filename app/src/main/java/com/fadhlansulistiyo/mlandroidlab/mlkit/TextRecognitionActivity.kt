@@ -27,6 +27,20 @@ class TextRecognitionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTextRecognitionBinding
     private var currentImageUri: Uri? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        binding = ActivityTextRecognitionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupToolbar()
+
+        if (!allPermissionsGranted()) {
+            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+        }
+
+        setupAction()
+    }
+
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
@@ -44,20 +58,6 @@ class TextRecognitionActivity : AppCompatActivity() {
             this,
             REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        binding = ActivityTextRecognitionBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setupToolbar()
-
-        if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
-        }
-
-        setupAction()
-    }
 
     private fun takePicture() {
         currentImageUri = getImageUri(this)

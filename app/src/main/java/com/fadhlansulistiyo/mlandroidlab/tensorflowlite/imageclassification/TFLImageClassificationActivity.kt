@@ -1,12 +1,16 @@
-package com.fadhlansulistiyo.mlandroidlab.tensorflowlite
+package com.fadhlansulistiyo.mlandroidlab.tensorflowlite.imageclassification
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Surface
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -15,6 +19,7 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.fadhlansulistiyo.mlandroidlab.R
 import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityTflimageClassificationBinding
 import org.tensorflow.lite.task.gms.vision.detector.Detection
 import java.text.NumberFormat
@@ -24,16 +29,18 @@ class TFLImageClassificationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTflimageClassificationBinding
     private lateinit var objectDetectorHelper: ObjectDetectorHelper
-    private val cameraSelector: CameraSelector by lazy {
-        CameraSelector.DEFAULT_BACK_CAMERA
-    }
+    private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupUI()
+
+        if (!allPermissionsGranted()) {
+            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+        }
     }
 
-    override fun onResume() {
+    public override fun onResume() {
         super.onResume()
         hideSystemUI()
         startImageClassification()
@@ -61,7 +68,9 @@ class TFLImageClassificationActivity : AppCompatActivity() {
             context = this,
             detectorListener = object : ObjectDetectorHelper.DetectorListener {
                 override fun onError(error: String) {
-                    showToast(error)
+                    runOnUiThread {
+                        showToast(error)
+                    }
                 }
 
                 override fun onResults(
@@ -81,9 +90,12 @@ class TFLImageClassificationActivity : AppCompatActivity() {
             .setAspectRatioStrategy(AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
             .build()
 
+        // Ensure viewFinder's display is not null
+        val rotation = binding.viewFinder.display?.rotation ?: Surface.ROTATION_0
+
         return ImageAnalysis.Builder()
             .setResolutionSelector(resolutionSelector)
-            .setTargetRotation(binding.viewFinder.display.rotation)
+            .setTargetRotation(rotation) // Use fallback if viewFinder's display is null
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
             .build().apply {
@@ -161,7 +173,27 @@ class TFLImageClassificationActivity : AppCompatActivity() {
         }
     }
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Toast.makeText(this, getString(R.string.permission_request_granted), Toast.LENGTH_LONG)
+                .show()
+        } else {
+            Toast.makeText(this, getString(R.string.permission_request_denied), Toast.LENGTH_LONG)
+                .show()
+        }
+    }
+
+    private fun allPermissionsGranted() =
+        ContextCompat.checkSelfPermission(
+            this,
+            REQUIRED_PERMISSION
+        ) == PackageManager.PERMISSION_GRANTED
+
+
     companion object {
         private const val TAG = "TFLImageClassificationActivity"
+        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 }

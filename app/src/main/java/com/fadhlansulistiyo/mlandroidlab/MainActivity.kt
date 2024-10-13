@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.fadhlansulistiyo.mlandroidlab.asclepius.CancerDetectionActivity
 import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityMainBinding
 import com.fadhlansulistiyo.mlandroidlab.mlkit.BarcodeScanningActivity
 import com.fadhlansulistiyo.mlandroidlab.mlkit.TextRecognitionActivity
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             toMlkit.cardTextRecognition.setOnClickListener { navigateTo(TextRecognitionActivity::class.java) }
             toMlkit.cardBarcodeScanning.setOnClickListener { navigateTo(BarcodeScanningActivity::class.java) }
-            toAsclepius.cardAsclepius.setOnClickListener { navigateTo(CancerDetectionActivity::class.java) }
             toTflite.cardImageClassification.setOnClickListener { navigateTo(TFLImageClassificationActivity::class.java) }
             toTflite.cardPrediction.setOnClickListener { navigateTo(RicePredictorActivity::class.java) }
         }

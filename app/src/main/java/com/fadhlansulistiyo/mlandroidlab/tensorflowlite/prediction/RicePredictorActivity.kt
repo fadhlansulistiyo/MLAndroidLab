@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.fadhlansulistiyo.mlandroidlab.asclepius.CancerDetectionResultBottomSheetFragment
 import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityRicePredictorBinding
 
 class RicePredictorActivity : AppCompatActivity() {
