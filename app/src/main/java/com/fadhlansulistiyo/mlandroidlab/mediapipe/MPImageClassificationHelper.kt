@@ -13,7 +13,7 @@ import com.google.mediapipe.tasks.vision.core.ImageProcessingOptions
 import com.google.mediapipe.tasks.vision.core.RunningMode
 import com.google.mediapipe.tasks.vision.imageclassifier.ImageClassifier
 
-class MediaPipeHelper(
+class MPImageClassificationHelper(
     private val threshold: Float = 0.1f,
     private val maxResults: Int = 3,
     private val modelName: String = "mobilenet_v1.tflite",

@@ -20,11 +20,11 @@ import com.google.mediapipe.tasks.components.containers.Classifications
 import java.text.NumberFormat
 import java.util.concurrent.Executors
 
-class MediaPipeActivity : AppCompatActivity() {
+class MPImageClassificationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMediaPipeBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-    private lateinit var mediaPipeHelper: MediaPipeHelper
+    private lateinit var imageClassificationHelper: MPImageClassificationHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +45,9 @@ class MediaPipeActivity : AppCompatActivity() {
     }
 
     private fun initializeMediaPipeHelper() {
-        mediaPipeHelper = MediaPipeHelper(
+        imageClassificationHelper = MPImageClassificationHelper(
             context = this,
-            classifierListener = object : MediaPipeHelper.ClassifierListener {
+            classifierListener = object : MPImageClassificationHelper.ClassifierListener {
                 override fun onError(error: String) {
                     runOnUiThread {
                         showToast(error)
@@ -102,7 +102,7 @@ class MediaPipeActivity : AppCompatActivity() {
             .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
             .build().also {
                 it.setAnalyzer(Executors.newSingleThreadExecutor()) { image ->
-                    mediaPipeHelper.classifyImage(image)
+                    imageClassificationHelper.classifyImage(image)
                 }
             }
     }
@@ -150,6 +150,6 @@ class MediaPipeActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TAG = "MediaPipeActivity"
+        private const val TAG = "MPImageClassificationActivity"
     }
 }
