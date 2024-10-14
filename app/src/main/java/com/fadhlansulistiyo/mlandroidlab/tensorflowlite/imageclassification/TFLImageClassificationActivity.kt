@@ -34,10 +34,6 @@ class TFLImageClassificationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupUI()
-
-        if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
-        }
     }
 
     public override fun onResume() {
@@ -173,27 +169,7 @@ class TFLImageClassificationActivity : AppCompatActivity() {
         }
     }
 
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            Toast.makeText(this, getString(R.string.permission_request_granted), Toast.LENGTH_LONG)
-                .show()
-        } else {
-            Toast.makeText(this, getString(R.string.permission_request_denied), Toast.LENGTH_LONG)
-                .show()
-        }
-    }
-
-    private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
-            this,
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
-
-
     companion object {
         private const val TAG = "TFLImageClassificationActivity"
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 }

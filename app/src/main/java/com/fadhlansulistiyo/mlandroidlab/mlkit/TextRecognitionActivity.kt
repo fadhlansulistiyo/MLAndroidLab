@@ -33,31 +33,8 @@ class TextRecognitionActivity : AppCompatActivity() {
         binding = ActivityTextRecognitionBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
-
-        if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
-        }
-
         setupAction()
     }
-
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            Toast.makeText(this, getString(R.string.permission_request_granted), Toast.LENGTH_LONG)
-                .show()
-        } else {
-            Toast.makeText(this, getString(R.string.permission_request_denied), Toast.LENGTH_LONG)
-                .show()
-        }
-    }
-
-    private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
-            this,
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
 
     private fun takePicture() {
         currentImageUri = getImageUri(this)
@@ -207,9 +184,5 @@ class TextRecognitionActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
-    }
-
-    companion object {
-        private const val REQUIRED_PERMISSION = android.Manifest.permission.CAMERA
     }
 }

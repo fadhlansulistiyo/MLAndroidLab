@@ -108,7 +108,6 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-
         <TextView
             android:id="@+id/tv_title_mediapipe"
             style="@style/Theme.MLAndroidLab.Headline1"
@@ -133,7 +132,7 @@
 
         <!-- Include horizontal scroll view layout -->
         <include
-            android:id="@+id/layout_mediapipe"
+            android:id="@+id/to_mediapipe"
             layout="@layout/layout_mediapipe"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -151,7 +150,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/firebase_ml"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_mediapipe" />
+            app:layout_constraintTop_toBottomOf="@id/to_mediapipe" />
 
         <ImageView
             android:id="@+id/icon_firebaseml"
@@ -207,6 +206,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
+            android:paddingBottom="32dp"
             app:layout_constraintStart_toStartOf="@+id/tv_title_generativeai"
             app:layout_constraintTop_toBottomOf="@id/tv_title_generativeai">
 
