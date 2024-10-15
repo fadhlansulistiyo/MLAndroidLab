@@ -56,4 +56,10 @@
     <string name="btn_stop">Stop</string>
     <string name="audio_classifier_failed">Audio Classifier failed to initialize. See error logs for details</string>
     <string name="audio_result">"Result: "</string>
+    <string name="classify">Classify</string>
+    <string name="text_classifier_failed">Text classifier failed to initialize. See error logs for details.</string>
+    <string name="classification_failed">Classification Failed</string>
+    <string name="error_empty_input">Please enter a word first</string>
+    <string name="no_classification_results">No Classification Result</string>
+
 </resources>

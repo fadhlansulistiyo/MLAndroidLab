@@ -10,8 +10,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityMainBinding
+import com.fadhlansulistiyo.mlandroidlab.databinding.ActivitySentimentAnalysisBinding
 import com.fadhlansulistiyo.mlandroidlab.mediapipe.audioclassification.MPAudioClassificationActivity
 import com.fadhlansulistiyo.mlandroidlab.mediapipe.imageclassification.MPImageClassificationActivity
+import com.fadhlansulistiyo.mlandroidlab.mediapipe.textclassification.SentimentAnalysisActivity
 import com.fadhlansulistiyo.mlandroidlab.mlkit.BarcodeScanningActivity
 import com.fadhlansulistiyo.mlandroidlab.mlkit.TextRecognitionActivity
 import com.fadhlansulistiyo.mlandroidlab.tensorflowlite.imageclassification.TFLImageClassificationActivity
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             toTflite.cardPrediction.setOnClickListener { navigateTo(RicePredictorActivity::class.java) }
             toMediapipe.cardImageClassification.setOnClickListener { navigateTo(MPImageClassificationActivity::class.java) }
             toMediapipe.cardAudioClassification.setOnClickListener { navigateTo(MPAudioClassificationActivity::class.java) }
+            toMediapipe.cardSentimentTextClassification.setOnClickListener { navigateTo(SentimentAnalysisActivity::class.java) }
         }
     }
 

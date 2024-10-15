@@ -62,6 +62,7 @@ play-services-tflite-java = { module = "com.google.android.gms:play-services-tfl
 play-services-tflite-support = { module = "com.google.android.gms:play-services-tflite-support", version.ref = "playServicesTfliteSupport" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 tasks-audio = { module = "com.google.mediapipe:tasks-audio", version.ref = "tasksVision" }
+tasks-text = { module = "com.google.mediapipe:tasks-text", version.ref = "tasksVision" }
 tasks-vision = { module = "com.google.mediapipe:tasks-vision", version.ref = "tasksVision" }
 tensorflow-lite-gpu = { module = "org.tensorflow:tensorflow-lite-gpu", version.ref = "tensorflowLiteGpu" }
 tensorflow-lite-metadata = { module = "org.tensorflow:tensorflow-lite-metadata", version.ref = "tensorflowLiteTaskVision" }

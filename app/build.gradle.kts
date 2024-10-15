@@ -107,4 +107,5 @@ dependencies {
     // MediaPipe
     implementation(libs.tasks.vision)
     implementation(libs.tasks.audio)
+    implementation(libs.tasks.text)
 }
