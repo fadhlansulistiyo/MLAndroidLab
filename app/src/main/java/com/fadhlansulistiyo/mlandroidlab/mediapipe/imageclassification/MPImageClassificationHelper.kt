@@ -1,4 +1,4 @@
-package com.fadhlansulistiyo.mlandroidlab.mediapipe
+package com.fadhlansulistiyo.mlandroidlab.mediapipe.imageclassification
 
 import android.content.Context
 import android.graphics.Bitmap

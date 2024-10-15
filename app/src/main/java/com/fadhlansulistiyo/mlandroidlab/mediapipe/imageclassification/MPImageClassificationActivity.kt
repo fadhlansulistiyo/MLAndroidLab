@@ -1,4 +1,4 @@
-package com.fadhlansulistiyo.mlandroidlab.mediapipe
+package com.fadhlansulistiyo.mlandroidlab.mediapipe.imageclassification
 
 import android.os.Build
 import android.os.Bundle
@@ -15,21 +15,21 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityMediaPipeBinding
+import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityMpImageClassificationBinding
 import com.google.mediapipe.tasks.components.containers.Classifications
 import java.text.NumberFormat
 import java.util.concurrent.Executors
 
 class MPImageClassificationActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMediaPipeBinding
+    private lateinit var binding: ActivityMpImageClassificationBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private lateinit var imageClassificationHelper: MPImageClassificationHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityMediaPipeBinding.inflate(layoutInflater)
+        binding = ActivityMpImageClassificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
@@ -112,7 +112,8 @@ class MPImageClassificationActivity : AppCompatActivity() {
             if (it.isNotEmpty() && it[0].categories().isNotEmpty()) {
                 val sortedCategories = it[0].categories().sortedByDescending { it?.score() }
                 val displayResult = sortedCategories.joinToString("\n") { category ->
-                    "${category.categoryName()} " + NumberFormat.getPercentInstance().format(category.score()).trim()
+                    "${category.categoryName()} " + NumberFormat.getPercentInstance()
+                        .format(category.score()).trim()
                 }
                 binding.tvResult.text = displayResult
                 binding.tvInferenceTime.text = "$inferenceTime ms"

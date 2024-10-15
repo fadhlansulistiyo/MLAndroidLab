@@ -51,4 +51,9 @@
     <string name="no_tflite_interpreter_loaded">No TFLite interpreter loaded</string>
     <string name="prediction_error">Prediction Error</string>
     <string name="model_loading_error">Error to load model</string>
+
+    <string name="btn_start">Start</string>
+    <string name="btn_stop">Stop</string>
+    <string name="audio_classifier_failed">Audio Classifier failed to initialize. See error logs for details</string>
+    <string name="audio_result">"Result: "</string>
 </resources>

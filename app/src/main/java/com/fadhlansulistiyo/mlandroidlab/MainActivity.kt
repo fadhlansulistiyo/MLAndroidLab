@@ -10,7 +10,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityMainBinding
-import com.fadhlansulistiyo.mlandroidlab.mediapipe.MPImageClassificationActivity
+import com.fadhlansulistiyo.mlandroidlab.mediapipe.audioclassification.MPAudioClassificationActivity
+import com.fadhlansulistiyo.mlandroidlab.mediapipe.imageclassification.MPImageClassificationActivity
 import com.fadhlansulistiyo.mlandroidlab.mlkit.BarcodeScanningActivity
 import com.fadhlansulistiyo.mlandroidlab.mlkit.TextRecognitionActivity
 import com.fadhlansulistiyo.mlandroidlab.tensorflowlite.imageclassification.TFLImageClassificationActivity
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setupActionListeners()
 
         if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+            requestPermissionLauncher.launch(REQUIRED_PERMISSIONS)
         }
     }
 
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             toTflite.cardImageClassification.setOnClickListener { navigateTo(TFLImageClassificationActivity::class.java) }
             toTflite.cardPrediction.setOnClickListener { navigateTo(RicePredictorActivity::class.java) }
             toMediapipe.cardImageClassification.setOnClickListener { navigateTo(MPImageClassificationActivity::class.java) }
+            toMediapipe.cardAudioClassification.setOnClickListener { navigateTo(MPAudioClassificationActivity::class.java) }
         }
     }
 
@@ -48,24 +50,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            Toast.makeText(this, getString(R.string.permission_request_granted), Toast.LENGTH_LONG)
-                .show()
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val allGranted = permissions.entries.all { it.value }
+        val message = if (allGranted) {
+            getString(R.string.permission_request_granted)
         } else {
-            Toast.makeText(this, getString(R.string.permission_request_denied), Toast.LENGTH_LONG)
-                .show()
+            getString(R.string.permission_request_denied)
+        }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun allPermissionsGranted(): Boolean {
+        return REQUIRED_PERMISSIONS.all {
+            ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
         }
     }
 
-    private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
-            this,
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
-
     companion object {
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        private val REQUIRED_PERMISSIONS = arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO
+        )
     }
 }
