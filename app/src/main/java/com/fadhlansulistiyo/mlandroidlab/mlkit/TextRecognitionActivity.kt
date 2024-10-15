@@ -11,6 +11,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.fadhlansulistiyo.mlandroidlab.MainActivity
 import com.fadhlansulistiyo.mlandroidlab.R
 import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityTextRecognitionBinding
 import com.fadhlansulistiyo.mlandroidlab.utils.getImageUri
@@ -178,6 +179,16 @@ class TextRecognitionActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@TextRecognitionActivity, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        startActivity(intent)
+        finish() // Clear the activity state when returning to MainActivity
     }
 
     @Suppress("DEPRECATION")

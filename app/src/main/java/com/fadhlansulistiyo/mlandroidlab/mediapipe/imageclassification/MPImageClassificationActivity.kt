@@ -1,5 +1,6 @@
 package com.fadhlansulistiyo.mlandroidlab.mediapipe.imageclassification
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.fadhlansulistiyo.mlandroidlab.MainActivity
 import com.fadhlansulistiyo.mlandroidlab.databinding.ActivityMpImageClassificationBinding
 import com.google.mediapipe.tasks.components.containers.Classifications
 import java.text.NumberFormat
@@ -37,6 +39,11 @@ class MPImageClassificationActivity : AppCompatActivity() {
         super.onResume()
         hideSystemUI()
         startCamera()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        imageClassificationHelper.releaseClassifier()
     }
 
     private fun startCamera() {
@@ -148,6 +155,27 @@ class MPImageClassificationActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@MPImageClassificationActivity, MainActivity::class.java).apply {
+            // Add flags to clear the task stack and start the app fresh
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+
+        // Start the activity and close the current one
+        startActivity(intent)
+        finish() // Ensure the current activity is finished
+        // Optionally kill the process to completely restart the app
+        android.os.Process.killProcess(android.os.Process.myPid())
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     companion object {

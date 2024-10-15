@@ -88,6 +88,11 @@ class MPImageClassificationHelper(
         return bitmapBuffer
     }
 
+    fun releaseClassifier() {
+        imageClassifier?.close()
+        imageClassifier = null
+    }
+
     interface ClassifierListener {
         fun onError(error: String)
         fun onResults(

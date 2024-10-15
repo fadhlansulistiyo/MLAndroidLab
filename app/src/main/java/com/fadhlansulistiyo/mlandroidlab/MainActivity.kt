@@ -70,6 +70,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish() // Clear the activity state when back button is pressed
+    }
+
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA,
