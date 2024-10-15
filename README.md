@@ -1,3 +1,5 @@
+![App Screenshot](screenshots/banner.png)
+
 # ML Android Lab
 
 ML Android Lab is a demo application showcasing the implementation of various machine learning techniques on Android, using frameworks like ML Kit, TensorFlow Lite, MediaPipe, Firebase Machine Learning, and Generative AI, all developed with Kotlin and the latest best practices.
