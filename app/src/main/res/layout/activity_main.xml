@@ -173,6 +173,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_title_firebase">
 
             <include
+                android:id="@+id/to_firebase"
                 layout="@layout/layout_firebase_ml"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -211,6 +212,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_title_generativeai">
 
             <include
+                android:id="@+id/to_gen_ai"
                 layout="@layout/layout_generative_ai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

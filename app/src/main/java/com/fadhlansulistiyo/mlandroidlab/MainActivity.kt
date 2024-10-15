@@ -44,12 +44,19 @@ class MainActivity : AppCompatActivity() {
             toMediapipe.cardImageClassification.setOnClickListener { navigateTo(MPImageClassificationActivity::class.java) }
             toMediapipe.cardAudioClassification.setOnClickListener { navigateTo(MPAudioClassificationActivity::class.java) }
             toMediapipe.cardSentimentTextClassification.setOnClickListener { navigateTo(SentimentAnalysisActivity::class.java) }
+            toFirebase.cardFirebase.setOnClickListener { showToast("Coming Soon") }
+            toGenAi.cardSmartReply.setOnClickListener { showToast("Coming Soon") }
+            toGenAi.cardBert.setOnClickListener { showToast("Coming Soon") }
         }
     }
 
     private fun navigateTo(destination: Class<*>) {
         val intent = Intent(this@MainActivity, destination)
         startActivity(intent)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
